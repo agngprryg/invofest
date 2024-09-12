@@ -37,7 +37,7 @@ const BerandaLayouts = () => {
               </div>
               <div className="relative w-[250px] md:w-[300px] lg:w-[350px] rounded-lg">
                 <img
-                  src="/assets/wisata/bukit-bintang/1.jpg"
+                  src="/assets/wisata/golden-park/1.jpg"
                   alt=""
                   className="w-full h-full rounded-lg"
                 />
@@ -47,7 +47,7 @@ const BerandaLayouts = () => {
               </div>
               <div className="relative w-[250px] md:w-[300px] lg:w-[350px] rounded-lg">
                 <img
-                  src="/assets/wisata/bukit-bintang/1.jpg"
+                  src="/assets/wisata/permadi-guci/1.jpg"
                   alt=""
                   className="w-full h-full rounded-lg"
                 />
