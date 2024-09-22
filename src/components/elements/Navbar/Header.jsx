@@ -2,6 +2,7 @@ import Link from "next/link";
 import React from "react";
 import { signOut, useSession } from "next-auth/react";
 import { SignOut } from "@phosphor-icons/react";
+import Image from "next/image";
 
 const NavHead = () => {
   const { data: session, status } = useSession();
@@ -14,11 +15,15 @@ const NavHead = () => {
   return (
     <>
       <div className="px-5 lg:px-10 py-3 flex items-center justify-between">
-        <img
-          src="/assets/logoGuci/guci-white.png"
-          alt="Logo Guci"
-          className="w-[105px] md:w-[150px] lg:w-[150px] -mt-3"
-        />
+        <div className="w-[105px] md:w-[150px] lg:w-[150px] -mt-3">
+          <Image
+            width={200}
+            height={200}
+            src="/assets/logoGuci/guci-white.png"
+            alt="Logo Guci"
+            layout="responsive"
+          />
+        </div>
         <div className="flex items-center gap-28">
           <div className="hidden md:hidden lg:flex gap-10 items-center text-white">
             <Link

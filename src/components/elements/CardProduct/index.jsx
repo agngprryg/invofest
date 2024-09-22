@@ -1,4 +1,5 @@
 import { Star } from "@phosphor-icons/react";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 const Card = ({ GetApi, align }) => {
@@ -21,17 +22,23 @@ const Card = ({ GetApi, align }) => {
       }
     };
     getProduct();
-  }, []);
+  }, [GetApi]);
 
   return (
     <div className={`lg:p-3 min-w-[500px] lg:min-w-0 flex ${align} space-x-4`}>
-      {isProducts.map((product) => {
+      {isProducts.map((product, index) => {
         return (
-          <div className="w-[150px] md:w-[200px] lg:w-[250px] rounded-lg border black bg-white lg:hover:scale-105 duration-200 transition-all ease-in-out">
-            <img
+          <div
+            key={index}
+            className="w-[150px] md:w-[200px] lg:w-[250px] rounded-lg border black bg-white lg:hover:scale-105 duration-200 transition-all ease-in-out"
+          >
+            <Image
+              width={500}
+              height={500}
               src={product.single_image}
               alt=""
               className="w-full h-[50%] object-cover rounded-t-lg"
+              layout="responsive"
             />
             <div className="p-2 lg:p-3 bg-white rounded-b-lg">
               <p className="text-xs lg:text-sm font-semibold">
