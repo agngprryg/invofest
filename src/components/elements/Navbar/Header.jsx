@@ -21,7 +21,7 @@ const NavHead = () => {
             height={200}
             src="/assets/logoGuci/guci-white.png"
             alt="Logo Guci"
-            layout="responsive"
+            className="w-full h-full"
           />
         </div>
         <div className="flex items-center gap-28">
@@ -62,7 +62,7 @@ const NavHead = () => {
                 Masuk
               </Link>
               <Link
-                href="/api/auth/signup"
+                href="/auth/signup"
                 className="px-4 py-1 text-xs font-semibold rounded-lg text-white bg-blue"
               >
                 Daftar

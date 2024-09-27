@@ -11,8 +11,10 @@ const poppins = Poppins({
 
 export default function App({ Component, pageProps }) {
   return (
-    <SessionProvider session={pageProps.session}>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <div className={poppins.className}>
+      <SessionProvider session={pageProps.session}>
+        <Component {...pageProps} />
+      </SessionProvider>
+    </div>
   );
 }

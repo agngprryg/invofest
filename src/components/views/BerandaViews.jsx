@@ -1,13 +1,10 @@
-import Card from "@/components/elements/CardProduct";
-import Footer from "@/components/elements/Footer";
-import Navbar from "@/components/fragments/Navbar";
+import BerandaLayouts from "../layouts/Beranda";
 import Link from "next/link";
-import React from "react";
+import Card from "@/components/elements/CardProduct";
 
-const BerandaLayouts = () => {
+const BerandaViews = () => {
   return (
-    <>
-      <Navbar />
+    <BerandaLayouts>
       <div className="lg:-mt-28 p-[10px] md:p-[50px] lg:p-[85px] bg-white lg:rounded-t-[120px]">
         <div className="px-3 py-5 lg:py-10 flex gap-5 bg-blue lg:bg-white rounded-xl ">
           <div className="lg:-mr-12 lg:mt-10 w-screen lg:w-[80%] overflow-x-auto lg:overflow-hidden z-20">
@@ -23,7 +20,7 @@ const BerandaLayouts = () => {
             </p>
             <Link
               href=""
-              className="w-[100px] px-2 py-1 mt-5 bg-white text-blue text-xs font-semibold rounded-lg"
+              className="w-[110px] px-2 py-1.5 mt-5 bg-white text-blue text-xs font-semibold rounded-lg"
             >
               Lihat Sekarang
             </Link>
@@ -40,7 +37,7 @@ const BerandaLayouts = () => {
             </p>
             <Link
               href=""
-              className="w-[100px] px-2 py-1 mt-5 bg-white text-blue text-xs font-semibold rounded-lg"
+              className="w-[110px] px-2 py-1.5 mt-5 bg-white text-blue text-xs font-semibold rounded-lg"
             >
               Lihat Sekarang
             </Link>
@@ -50,9 +47,8 @@ const BerandaLayouts = () => {
           </div>
         </div>
       </div>
-      <Footer />
-    </>
+    </BerandaLayouts>
   );
 };
 
-export default BerandaLayouts;
+export default BerandaViews;

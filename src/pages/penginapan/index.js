@@ -1,10 +1,9 @@
-import PenginapanLayout from "@/components/layouts/penginapanLayout";
-import React from "react";
+import PenginapanViews from "@/components/views/PenginapanViews";
 
 const PenginapanPage = () => {
   return (
     <>
-      <PenginapanLayout />
+      <PenginapanViews />
     </>
   );
 };

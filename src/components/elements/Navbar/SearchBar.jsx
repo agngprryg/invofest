@@ -3,7 +3,6 @@ import { MagnifyingGlass } from "@phosphor-icons/react";
 
 const SearchBar = ({ width }) => {
   const [index, setIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(true);
   const placeholder = [
     "Cari Hotel Guciku",
     "Cari Wisata Permadi",

@@ -13,7 +13,7 @@ const Card = ({ GetApi, align }) => {
 
         const mappedProducts = data.map((product) => ({
           ...product,
-          discountedPrice: product.price * 0.5, // Hitung diskon 50%
+          discountedPrice: product.price * 0.5,
         }));
 
         setIsProduct(mappedProducts);
@@ -33,12 +33,11 @@ const Card = ({ GetApi, align }) => {
             className="w-[150px] md:w-[200px] lg:w-[250px] rounded-lg border black bg-white lg:hover:scale-105 duration-200 transition-all ease-in-out"
           >
             <Image
-              width={500}
-              height={500}
+              width={200}
+              height={200}
               src={product.single_image}
-              alt=""
-              className="w-full h-[50%] object-cover rounded-t-lg"
-              layout="responsive"
+              alt={product.title}
+              className="w-full h-[50%] object-contain rounded-t-lg"
             />
             <div className="p-2 lg:p-3 bg-white rounded-b-lg">
               <p className="text-xs lg:text-sm font-semibold">

@@ -1,11 +1,13 @@
 import Navbar from "@/components/fragments/Navbar";
+import CheckoutLayout from "@/components/layouts/DetailWisata/Checkout";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 export default function checkoutPage() {
-  const [selectedDate, setSelectedDate] = useState(null);
   const router = useRouter();
-  const { date } = router.query;
+  const [selectedDate, setSelectedDate] = useState(null);
+  const { date, order, price } = router.query;
+  const [isOrder, setOrder] = useState();
 
   useEffect(() => {
     if (date) {
@@ -16,14 +18,17 @@ export default function checkoutPage() {
     }
   }, [date]);
 
+  useEffect(() => {
+    if (order) {
+      const parsedOrder = JSON.parse(decodeURIComponent(order));
+      setOrder(parsedOrder);
+    }
+  }, [order]);
+
   return (
     <>
       <Navbar />
-      {!selectedDate ? (
-        <p>eror</p>
-      ) : (
-        <p>tanggal yang kamu pilih : {selectedDate?.toLocaleDateString()}</p>
-      )}
+      <CheckoutLayout selectDate={selectedDate} order={isOrder} price={price} />
     </>
   );
 }

@@ -4,7 +4,7 @@ const NavBg = () => {
   return (
     <div>
       <img
-        src="/assets/bg/bg.jpg"
+        src="/assets/bg/bg2.jpg"
         alt=""
         className="-z-40 absolute w-full h-[270px] md:h-[400px] lg:h-[600px]"
       />

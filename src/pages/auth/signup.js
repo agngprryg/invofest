@@ -24,7 +24,7 @@ const SingUp = () => {
 
     if (data.success) {
       alert("berhasil");
-      window.location.href = "/";
+      window.location.href = "/auth/signin";
     } else {
       alert(data.message);
     }

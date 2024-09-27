@@ -1,4 +1,4 @@
-import DetWisata from "@/components/layouts/wisataLayout/DetWisata";
+import DetailWisataViews from "@/components/views/DetailWisataViews";
 
 export async function getServerSideProps(context) {
   const { id } = context.params;
@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
 const wisataDynamic = ({ products }) => {
   return (
     <>
-      <DetWisata products={products} />
+      <DetailWisataViews product={products} />
     </>
   );
 };
