@@ -2,7 +2,7 @@ import Footer from "@/components/fragments/Footer";
 import Navbar from "@/components/fragments/Navbar";
 import React from "react";
 
-const PenginapanLayout = ({ children }) => {
+const MyordersLayout = ({ children }) => {
   return (
     <>
       <Navbar />
@@ -14,4 +14,4 @@ const PenginapanLayout = ({ children }) => {
   );
 };
 
-export default PenginapanLayout;
+export default MyordersLayout;

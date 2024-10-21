@@ -1,5 +1,6 @@
 import clientPromise from "@/lib/mongodb/init";
 import Midtrans from "midtrans-client";
+import nodemailer from "nodemailer";
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -23,6 +24,8 @@ export default async function handler(req, res) {
         status: "pending",
       });
 
+      const generateIdOrder = newOrder.insertedId.toString();
+
       let snap = new Midtrans.Snap({
         isProduction: false,
         serverKey: process.env.SERVER_KEY_MIDTRANS,
@@ -31,7 +34,7 @@ export default async function handler(req, res) {
 
       let transactionParams = {
         transaction_details: {
-          order_id: newOrder.insertedId.toString(),
+          order_id: generateIdOrder,
           gross_amount: total_price,
         },
         customer_details: {
@@ -40,16 +43,52 @@ export default async function handler(req, res) {
         },
         item_details: [
           {
-            id: newOrder.insertedId.toString(),
+            id: generateIdOrder,
             price: total_price / quantity,
             quantity: quantity,
             name: wisata,
           },
         ],
+        callbacks: {
+          finish: "http://localhost:3000/widget/success",
+        },
       };
 
+      const transporter = nodemailer.createTransport({
+        service: "gmail",
+        auth: {
+          user: process.env.EMAIL_USER,
+          pass: process.env.EMAIL_PASS,
+        },
+      });
+
+      const mailOptions = {
+        from: process.env.EMAIL_USER,
+        to: email,
+        subject: `halo kak ${name}  Yeayy pesanan kamu berhasil dengan no transaksi : ${generateIdOrder}`,
+        text: `Terimakasih udah pesen di guciku.co Semoga Liburan kamu Menyenangkan
+        detail Transaksi kamu :
+
+        Order id : ${generateIdOrder}
+        jumlah : ${quantity},
+        total Harga : ${total_price}
+        status : pending
+        `,
+      };
+
+      try {
+        await transporter.sendMail(mailOptions);
+      } catch (emailError) {
+        console.error("Error sending email:", emailError);
+        await db.collection("orders").deleteOne({ _id: newOrder.insertedId });
+
+        return res.status(500).json({
+          success: false,
+          message: "Order failed. Unable to send confirmation email.",
+        });
+      }
+
       const transaction = await snap.createTransactionToken(transactionParams);
-      console.log(transaction);
 
       res.status(201).json({
         success: true,

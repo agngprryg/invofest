@@ -37,6 +37,7 @@ const Card = ({ GetApi, align }) => {
               height={200}
               src={product.single_image}
               alt={product.title}
+              layout="responsive"
               className="w-full h-[50%] object-contain rounded-t-lg"
             />
             <div className="p-2 lg:p-3 bg-white rounded-b-lg">

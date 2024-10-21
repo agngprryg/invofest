@@ -17,6 +17,7 @@ const DetailWisataViews = ({ product }) => {
   const weekday = product.price.weekday;
   const defaultPrice = dayOfWeek === 0 || dayOfWeek === 6 ? weekend : weekday;
 
+  const [isLoading, setIsLoading] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
   const [dayType, setDayType] = useState("");
   const [price, setPrice] = useState(defaultPrice);
@@ -62,27 +63,10 @@ const DetailWisataViews = ({ product }) => {
     }
   };
 
-  const handlechekout = () => {
-    if (selectedDate) {
-      localStorage.setItem(
-        "orderDetails",
-        JSON.stringify({
-          product: objectProduct,
-          price: price,
-        })
-      );
-
-      router.push({
-        pathname: `/wisata/checkout/`,
-        query: {
-          date: selectedDate.toISOString(),
-        },
-      });
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    setIsLoading(true);
 
     const updatedFormData = {
       ...formData,
@@ -90,7 +74,7 @@ const DetailWisataViews = ({ product }) => {
       total_price: totalPrice,
     };
 
-    const response = await fetch("/api/transaction/checkout", {
+    const response = await fetch("/api/transaction/withdbconnect", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -99,6 +83,7 @@ const DetailWisataViews = ({ product }) => {
     });
 
     const data = await response.json();
+    console.log(data);
 
     if (data.token) {
       router.push({
@@ -109,6 +94,7 @@ const DetailWisataViews = ({ product }) => {
       });
     } else {
       alert(data.message);
+      setIsLoading(false);
     }
   };
 
@@ -144,7 +130,7 @@ const DetailWisataViews = ({ product }) => {
           onSubmit={handleSubmit}
           className="w-full lg:w-auto flex lg:flex-col flex-wrap justify-center"
         >
-          <div className="grid md:grid-cols-2 gap-5 lg:gap-0 lg:gap-x-20 lg:gap-y-5">
+          <div className="grid md:grid-cols-2 gap-5 lg:gap-0 lg:gap-x-2 lg:gap-y-5">
             <div>
               <h1 className="mb-2 text-sm font-semibold font-poppins">
                 Tanggal yang kamu pilih:
@@ -288,9 +274,12 @@ const DetailWisataViews = ({ product }) => {
             </div>
             <button
               type="submit"
-              className="w-full h-[40px] lg:h-[50px] mt-5 lg:mt-10 bg-orange text-white font-semibold rounded-lg"
+              disabled={isLoading}
+              className="w-full h-[40px] lg:h-[50px] mt-5 lg:mt-10 bg-orange text-white font-semibold rounded-lg disabled:bg-gray"
             >
-              Lanjut Pembayaran
+              {isLoading
+                ? "Tunggu Ya Lagi Nyiapin Pembayaran"
+                : "Lanjut Pembayaran"}
             </button>
           </div>
         </form>

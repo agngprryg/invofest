@@ -26,7 +26,7 @@ const BerandaViews = () => {
             </Link>
           </div>
         </div>
-        <div className="mt-10 lg:-mt-20 px-3 py-5 lg:py-10 flex gap-5 bg-orange lg:bg-white rounded-xl">
+        {/* <div className="mt-10 lg:-mt-20 px-3 py-5 lg:py-10 flex gap-5 bg-orange lg:bg-white rounded-xl">
           <div className="w-[100%] pr-10 lg:w-[20%] lg:pr-10 lg:pl-10 lg:py-20 flex flex-col justify-center lg:bg-orange rounded-xl z-10 ">
             <h1 className="text-sm md:text-lg text-white">
               Hotel yang paling dicari
@@ -45,7 +45,7 @@ const BerandaViews = () => {
           <div className="lg:-ml-12 lg:mt-10 w-screen lg:w-[80%] overflow-x-auto lg:overflow-hidden z-20">
             <Card GetApi={"wisata/populer"} />
           </div>
-        </div>
+        </div> */}
       </div>
     </BerandaLayouts>
   );

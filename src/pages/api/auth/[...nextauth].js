@@ -1,7 +1,8 @@
 import NextAuth from "next-auth";
-import CredentialsProvider from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
-import clientPromise from "@/lib/mongodb/init";
+import CredentialsProvider from "next-auth/providers/credentials";
+import dbConnect from "@/lib/mongodb/dbConnect";
+import User from "@/models/User";
 
 export default NextAuth({
   providers: [
@@ -12,11 +13,9 @@ export default NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        const client = await clientPromise;
-        const db = client.db();
-        const user = await db
-          .collection("users")
-          .findOne({ email: credentials.email });
+        await dbConnect();
+
+        const user = await User.findOne({ email: credentials.email });
 
         if (!user) {
           throw new Error("No user found with that email");
@@ -28,7 +27,7 @@ export default NextAuth({
         );
 
         if (!isPasswordCorrect) {
-          throw new Error("Invalid credentials");
+          throw new Error("Invalid password");
         }
 
         return { id: user._id, email: user.email, name: user.name };

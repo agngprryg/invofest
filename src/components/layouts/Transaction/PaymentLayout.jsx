@@ -1,3 +1,4 @@
+import BreadCumb from "@/components/elements/BreadCumb";
 import Footer from "@/components/fragments/Footer";
 import Navbar from "@/components/fragments/Navbar";
 import { Circle } from "@phosphor-icons/react";
@@ -16,34 +17,10 @@ const PaymentLayout = ({ children }) => {
           <div className="mt-10 lg:mt-0">
             <h1 className="lg:text-xl font-semibold">Detail Pesanan Kamu</h1>
             <p className="mt-2 lg:mt-5 text-xs lg:text-sm">
-              Pastikan kamu mengisi data dengan benar ya
+              Coba Dicek Lagi Apa Pesanan Kamu Udah Sesuai?
             </p>
           </div>
-          <div className="flex gap-3 lg:gap-5">
-            <p
-              className={`text-xs ${
-                currentRoute.includes("/wisata") ? "text-orange" : ""
-              }`}
-            >
-              Detail pesanan
-            </p>
-            <Circle weight="fill" width={5} />
-            <p
-              className={`text-xs ${
-                currentRoute.includes("/payment") ? "text-orange" : ""
-              }`}
-            >
-              Selesaikan pembayaran
-            </p>
-            <Circle weight="fill" width={5} />
-            <p
-              className={`text-xs ${
-                currentPath === "/success" ? "text-orange" : ""
-              }`}
-            >
-              Pesanan berhasil
-            </p>
-          </div>
+          <BreadCumb route={currentRoute} path={currentPath} />
         </div>
         {children}
       </div>

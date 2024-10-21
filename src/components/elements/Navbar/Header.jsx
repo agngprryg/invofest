@@ -45,7 +45,7 @@ const NavHead = () => {
               Wisata
             </Link>
             <Link
-              href="/pesananSaya"
+              href="/my-orders"
               className="text-sm hover:scale-110 transition-all ease-in-out"
             >
               Pesanan Saya
@@ -92,7 +92,7 @@ const NavHead = () => {
         <Link href="/penginapan" className="text-xs">
           Penginapan
         </Link>
-        <Link href="/pesananSaya" className="text-xs">
+        <Link href="/my-orders" className="text-xs">
           Pesanan Saya
         </Link>
       </div>

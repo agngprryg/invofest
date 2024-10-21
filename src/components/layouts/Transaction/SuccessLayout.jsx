@@ -1,14 +1,13 @@
 import BreadCumb from "@/components/elements/BreadCumb";
 import Footer from "@/components/fragments/Footer";
 import Navbar from "@/components/fragments/Navbar";
-import { Circle } from "@phosphor-icons/react";
 import { useRouter } from "next/router";
+import React from "react";
 
-const DetailWisataLayout = ({ children }) => {
+const SuccessLayout = ({ children }) => {
   const router = useRouter();
   const currentPath = router.pathname;
   const currentRoute = router.asPath;
-
   return (
     <>
       <Navbar />
@@ -17,7 +16,7 @@ const DetailWisataLayout = ({ children }) => {
           <div className="mt-10 lg:mt-0">
             <h1 className="lg:text-xl font-semibold">Detail Pesanan Kamu</h1>
             <p className="mt-2 lg:mt-5 text-xs lg:text-sm">
-              Pastikan kamu mengisi data dengan benar ya
+              Coba Dicek Lagi Apa Pesanan Kamu Udah Sesuai?
             </p>
           </div>
           <BreadCumb route={currentRoute} path={currentPath} />
@@ -29,4 +28,4 @@ const DetailWisataLayout = ({ children }) => {
   );
 };
 
-export default DetailWisataLayout;
+export default SuccessLayout;

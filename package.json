@@ -18,8 +18,11 @@
     "locale": "^0.1.0",
     "midtrans-client": "^1.3.1",
     "mongodb": "^6.9.0",
+    "mongoose": "^8.7.0",
     "next": "14.2.9",
     "next-auth": "^4.24.7",
+    "nodemailer": "^6.9.15",
+    "qrcode.react": "^4.0.1",
     "react": "^18",
     "react-datepicker": "^7.3.0",
     "react-dom": "^18"

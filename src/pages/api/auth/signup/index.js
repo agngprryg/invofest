@@ -1,38 +1,54 @@
-import { hash } from "bcryptjs";
-import clientPromise from "@/lib/mongodb/init";
+import bcrypt from "bcryptjs"; // Untuk enkripsi password
+import User from "@/models/User";
+import dbConnect from "@/lib/mongodb/dbConnect";
 
-export default async function handler(req, res) {
+const signUp = async (req, res) => {
+  await dbConnect();
+
   if (req.method === "POST") {
     const { name, email, password } = req.body;
 
+    // Validasi input
     if (!name || !email || !password) {
-      return res.status(400).json({ message: "All field is required" });
+      return res.status(400).json({ message: "Semua field harus diisi" });
     }
 
+    // Cek apakah email sudah terdaftar
     try {
-      const client = await clientPromise;
-
-      const db = client.db();
-
-      const existingUser = await db.collection("users").findOne({ email });
-
+      const existingUser = await User.findOne({ email });
       if (existingUser) {
-        return res.status(400).json({ message: "Email already in use" });
+        return res.status(400).json({ message: "Email sudah terdaftar" });
       }
 
-      const hashedPassword = await hash(password, 12);
+      // Enkripsi password
+      const salt = await bcrypt.genSalt(10);
+      const hashedPassword = await bcrypt.hash(password, salt);
 
-      await db.collection("users").insertOne({
+      // Membuat user baru
+      const newUser = new User({
         name,
         email,
         password: hashedPassword,
       });
 
-      res.status(201).json({ success: true, message: "User created" });
+      // Simpan user ke database
+      const savedUser = await newUser.save();
+
+      return res.status(201).json({
+        success: true,
+        user: {
+          id: savedUser._id,
+          name: savedUser.name,
+          email: savedUser.email,
+        },
+      });
     } catch (error) {
-      res.status(500).json({ message: "Internal server error" });
+      console.error(error);
+      return res.status(500).json({ message: "Terjadi kesalahan server" });
     }
   } else {
-    res.status(405).json({ message: "Method not allowed" });
+    return res.status(405).json({ message: "Metode tidak diizinkan" });
   }
-}
+};
+
+export default signUp;
